@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter.messagebox import showinfo
 import pyttsx3
 from PIL import Image, ImageTk
-import platform
 
 import webbrowser
 import time
@@ -27,6 +26,7 @@ class MainWindow:
         self.master = master
         master.title("Speechy App")
         master.geometry("800x400")
+        #master.configure(bg='lightgrey')
 
         # Reserve some place for img/test img placement
         load = Image.open("icons/king.png")
@@ -56,10 +56,16 @@ class MainWindow:
         # TO DO: Change to read from file maybe?
         # List of writers to pick...
         write = ('Stephen King', 'Adam Mickiewicz', 'Graham Masterton', 'Katarzyna Grohola',
-                 'Juliusz Slowacki KEKW')
+                 'Juliusz Slowacki KEKW', 'Norman Davies', 'Ken Follet' )
         write_var = StringVar(master, value=write)
 
-        self.writers_list = Listbox(master, listvariable=write_var, height=5)
+        self.writers_list = Listbox(master, listvariable=write_var, height=5, font=("Calibri Light", 12))
+        # Scrollbar for listbox
+        scrollbar = Scrollbar(self.writers_list, orient="vertical")
+        scrollbar.config(command=self.writers_list.yview)
+        scrollbar.place(x=145, y=30)
+
+        self.writers_list.config(yscrollcommand=scrollbar.set)
 
         # Scrollbar - not working for now
         # self.scrollbar = Scrollbar(
@@ -70,8 +76,8 @@ class MainWindow:
         # self.writers_list['yscrollcommand'] = self.scrollbar.set
         #
         # self.scrollbar.grid(
-        #     column=1,
-        #     row=1,
+        #     column=2,
+        #     row=2,
         #     sticky='ns')
 
         self.writers_list.place(x=25, y=150)
@@ -98,7 +104,7 @@ class MainWindow:
 
         # Buttons:
         self.greet_button = Button(master, text="Pick", command=self.greet)
-        self.greet_button.place(x=25, y=250)
+        self.greet_button.place(x=25, y=270)
 
         self.help_button = Button(master, text="About", command=self.help)
         self.help_button.place(x=0, y=0)
