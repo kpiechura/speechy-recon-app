@@ -1,10 +1,22 @@
 from tkinter import *
 from tkinter.messagebox import showinfo
 import pyttsx3
+import json
 from PIL import Image, ImageTk
 
 import webbrowser
 import time
+
+# Read info from JSON obj
+class JsonObj:
+
+    def __init__(self):
+        database = open("writer.json", encoding='utf-8')
+        data = json.load(database)
+
+        for i in data['writers']:
+            print(i)
+        database.close()
 
 
 # Class with configuration of Txt2S
@@ -142,6 +154,6 @@ class MainWindow:
 root = Tk()
 my_gui = MainWindow(root)
 
+json_obj = JsonObj()
+
 root.mainloop()
-
-

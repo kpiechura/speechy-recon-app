@@ -1,0 +1,19 @@
+{
+  "writers": [
+    {
+      "name": "Stephen King",
+      "age": 29,
+      "info": "Stephen Edwin King is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels."
+    },
+    {
+      "name": "Adam Mickiewicz",
+      "age": 39,
+      "info": "Adam Mickiewicz is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels."
+    },
+    {
+      "name": "Ken Follet",
+      "age": 1000000,
+      "info": "Ken Follet is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels."
+    }
+  ]
+}
