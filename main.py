@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter.messagebox import showinfo
 import pyttsx3
 from PIL import Image, ImageTk
+import platform
 
 import webbrowser
 import time
@@ -37,7 +38,7 @@ class MainWindow:
         # Title screen
         self.label = Label(master, text="Speechy")
         self.label.config(font=("Calibri Light", 24))
-        self.label.place(x=25, y=10)
+        self.label.place(x=25, y=30)
 
         # Title screen
         say_line = "A database for your favorite writers"
@@ -45,7 +46,7 @@ class MainWindow:
 
         self.label1 = Label(master, text=say_line)
         self.label1.config(font=("Calibri Light italic", 16))
-        self.label1.place(x=25, y=50)
+        self.label1.place(x=25, y=70)
 
         self.pick_label = Label(master, text="Pick writer: ")
         self.pick_label.config(font=("Calibri Light", 14))
@@ -99,12 +100,24 @@ class MainWindow:
         self.greet_button = Button(master, text="Pick", command=self.greet)
         self.greet_button.place(x=25, y=250)
 
+        self.help_button = Button(master, text="About", command=self.help)
+        self.help_button.place(x=0, y=0)
+
         self.close_button = Button(master, text="Close", command=master.quit)
         self.close_button.place(x=25, y=350)
 
     def greet(self):
         print("Writer picked!")
         Speech("Time to throw pogchamp!")
+
+    def help(self):
+        showinfo(
+            title='About',
+            message="App version: 0.1v\n \n"
+                    "Authors:\nKamil Piechura\n"
+                    "Lukasz Bugajski \n"
+                    "Dariusz Kowalczyk"
+        )
 
 
 root = Tk()
