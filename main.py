@@ -6,6 +6,7 @@ from PIL import Image, ImageTk
 import webbrowser
 import time
 
+
 # Class with configuration of Txt2S
 class Speech:
 
@@ -25,7 +26,7 @@ class MainWindow:
     def __init__(self, master):
         self.master = master
         master.title("Speechy App")
-        master.geometry("800x400")
+        master.geometry("800x600")
         #master.configure(bg='lightgrey')
 
         # Reserve some place for img/test img placement
@@ -50,7 +51,12 @@ class MainWindow:
 
         self.pick_label = Label(master, text="Pick writer: ")
         self.pick_label.config(font=("Calibri Light", 14))
-        self.pick_label.place(x=25, y=110)
+        self.pick_label.place(x=25, y=130)
+
+        self.info_lab = Label(master,
+                              text="About writer:")
+        self.info_lab.config(font=("Calibri Light", 14))
+        self.info_lab.place(x=25, y=370)
         # End of title screen
 
         # TO DO: Change to read from file maybe?
@@ -59,11 +65,11 @@ class MainWindow:
                  'Juliusz Slowacki KEKW', 'Norman Davies', 'Ken Follet' )
         write_var = StringVar(master, value=write)
 
-        self.writers_list = Listbox(master, listvariable=write_var, height=5, font=("Calibri Light", 12))
+        self.writers_list = Listbox(master, listvariable=write_var, height=6, font=("Calibri Light", 12))
         # Scrollbar for listbox
         scrollbar = Scrollbar(self.writers_list, orient="vertical")
         scrollbar.config(command=self.writers_list.yview)
-        scrollbar.place(x=145, y=30)
+        scrollbar.place(x=145, y=0)
 
         self.writers_list.config(yscrollcommand=scrollbar.set)
 
@@ -80,7 +86,7 @@ class MainWindow:
         #     row=2,
         #     sticky='ns')
 
-        self.writers_list.place(x=25, y=150)
+        self.writers_list.place(x=25, y=170)
 
         # Handle events for list
         def items_selected(event):
@@ -94,9 +100,14 @@ class MainWindow:
             print(selected_langs)
             Speech(selected_langs)
 
-            showinfo(
-                title='Information',
-                message=msg)
+            #Text about author
+            self.info_lab = Label(master, text="Lorem Ipsum Lorem Ipsum  Lorem Ipsum  Lorem Ipsu Lorem Ipsum Lorem Ipsum  Lorem Ipsum  Lorem Ipsum ... ")
+            self.info_lab.config(font=("Calibri Light", 12))
+            self.info_lab.place(x=25, y=400)
+
+            # showinfo(
+            #     title='Information',
+            #     message=msg)
             return selected_langs
 
         self.writers_list.bind('<<ListboxSelect>>', items_selected)
@@ -104,25 +115,27 @@ class MainWindow:
 
         # Buttons:
         self.greet_button = Button(master, text="Pick", command=self.greet)
-        self.greet_button.place(x=25, y=270)
+        self.greet_button.place(x=25, y=310)
 
         self.help_button = Button(master, text="About", command=self.help)
         self.help_button.place(x=0, y=0)
 
         self.close_button = Button(master, text="Close", command=master.quit)
-        self.close_button.place(x=25, y=350)
+        self.close_button.place(x=45, y=0)
 
     def greet(self):
         print("Writer picked!")
         Speech("Time to throw pogchamp!")
 
     def help(self):
+        message="App version: 0.1v\n\nAuthors:" \
+                "\n\nKamil Piechura" \
+                "\n\nLukasz Bugajski" \
+                "\n\nDariusz Kowalczyk"
+        Speech(message)
         showinfo(
             title='About',
-            message="App version: 0.1v\n \n"
-                    "Authors:\nKamil Piechura\n"
-                    "Lukasz Bugajski \n"
-                    "Dariusz Kowalczyk"
+            message=message
         )
 
 
