@@ -1,19 +1,20 @@
 {
-  "writers": [
+  "Stephen King": [
     {
-      "name": "Stephen King",
-      "age": 29,
-      "info": "Stephen Edwin King is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels."
-    },
+      "info": "1974 Carrie \n\t1975 Salem's Lot \n1977 The Shining \n1978 The Stand \n1979 The Dead Zone",
+      "img": "icons/king.png"
+    }
+  ],
+  "Adam Mickiewicz": [
     {
-      "name": "Adam Mickiewicz",
-      "age": 39,
-      "info": "Adam Mickiewicz is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels."
-    },
+      "info": "Adam Mickiewicz is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels.",
+      "img": "icons/gnome.png"
+    }
+  ],
+  "Ken Follet": [
     {
-      "name": "Ken Follet",
-      "age": 1000000,
-      "info": "Ken Follet is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels."
+      "info": "Ken Follet is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels.",
+      "img": "icons/gnome.png"
     }
   ]
 }

@@ -8,15 +8,26 @@ import webbrowser
 import time
 
 # Read info from JSON obj
-class JsonObj:
+class JsonObj():
 
-    def __init__(self):
-        database = open("writer.json", encoding='utf-8')
-        data = json.load(database)
+    writer_info = ""
+    #path_to_img = ""
 
-        for i in data['writers']:
-            print(i)
-        database.close()
+    def __init__(self, writer_info):
+        with open("writer.json", encoding='utf-8') as jsondata:
+            data = json.load(jsondata)
+
+        # Part to show proper info about writer
+        print(data[writer_info][0]['info'])
+        writer_info = (data[writer_info][0]['info'])
+        self.writer_info = writer_info
+
+        # Part for loading proper img
+        # print(data[path_to_img][0]['img'])
+        # path_to_img = (data[path_to_img][0]['img'])
+        # self.path_to_img = path_to_img
+
+        jsondata.close()
 
 
 # Class with configuration of Txt2S
@@ -39,7 +50,7 @@ class MainWindow:
         self.master = master
         master.title("Speechy App")
         master.geometry("800x600")
-        #master.configure(bg='lightgrey')
+        # master.configure(bg='lightgrey')
 
         # Reserve some place for img/test img placement
         load = Image.open("icons/king.png")
@@ -113,7 +124,8 @@ class MainWindow:
             Speech(selected_langs)
 
             #Text about author
-            self.info_lab = Label(master, text="Lorem Ipsum Lorem Ipsum  Lorem Ipsum  Lorem Ipsu Lorem Ipsum Lorem Ipsum  Lorem Ipsum  Lorem Ipsum ... ")
+            json_obj = JsonObj(selected_langs)
+            self.info_lab = Label(master, text=json_obj.writer_info, wraplength=700, justify='center')
             self.info_lab.config(font=("Calibri Light", 12))
             self.info_lab.place(x=25, y=400)
 
@@ -154,6 +166,6 @@ class MainWindow:
 root = Tk()
 my_gui = MainWindow(root)
 
-json_obj = JsonObj()
+
 
 root.mainloop()
