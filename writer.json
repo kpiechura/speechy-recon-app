@@ -1,20 +1,26 @@
 {
   "Stephen King": [
     {
-      "info": "1974 Carrie \n\t1975 Salem's Lot \n1977 The Shining \n1978 The Stand \n1979 The Dead Zone",
-      "img": "icons/king.png"
+      "info": "Stephen King is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels. His books have sold more than 350 million copies, and many have been adapted into films, television series, miniseries, and comic books. King has published 62 novels, including seven under the pen name Richard Bachman, and five non-fiction books. He has also written approximately 200 short stories, most of which have been published in book collections.",
+      "img": "icons/Stephen King.png"
     }
   ],
   "Adam Mickiewicz": [
     {
-      "info": "Adam Mickiewicz is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels.",
-      "img": "icons/gnome.png"
+      "info": "Adam Mickiewicz was a Polish poet, dramatist, essayist, publicist, translator and political activist. He is known chiefly for the poetic drama Dziady (Forefathers' Eve) and the national epic poem Pan Tadeusz. His other influential works include Konrad Wallenrod and Grażyna. All these served as inspiration for uprisings against the three imperial powers that had partitioned the Polish–Lithuanian Commonwealth out of existence.",
+      "img": "icons/Adam Mickiewicz.png"
     }
   ],
-  "Ken Follet": [
+  "Graham Masterton": [
     {
-      "info": "Ken Follet is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels.",
-      "img": "icons/gnome.png"
+      "info": "Graham Masterton is a British horror author. Originally editor of Mayfair and the British edition of Penthouse, Graham Masterton's first novel The Manitou was released in 1976. This novel was adapted in 1978 for the film The Manitou. Further works garnered critical acclaim, including a Special Edgar Award by the Mystery Writers of America for Charnel House and a Silver Medal by the West Coast Review of Books for Tengu. He is also the only non-French winner of the prestigious Prix Julia Verlanger for his novel Family Portrait, an imaginative reworking of the Oscar Wilde novel The Picture of Dorian Gray. Masterton was also the editor of Scare Care, a horror anthology published for the benefit of abused children in Europe and the U.S.",
+      "img": "icons/Adam Mickiewicz.png"
+    }
+  ],
+  "Ken Follett": [
+    {
+      "info": "Ken Follett is a Welsh author of thrillers and historical novels who has sold more than 160 million copies of his works. Many of his books have achieved high ranking on best seller lists. For example, in the US, many reached the number 1 position on the New York Times Best Seller list, including Edge of Eternity, Fall of Giants, A Dangerous Fortune, The Key to Rebecca, Lie Down with Lions, Triple, Winter of the World, and World Without End.",
+      "img": "icons/Stephen King.png"
     }
   ]
 }

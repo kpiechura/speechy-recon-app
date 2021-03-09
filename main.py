@@ -3,6 +3,8 @@ from tkinter.messagebox import showinfo
 import pyttsx3
 import json
 from PIL import Image, ImageTk
+import concurrent.futures
+import sys
 
 import webbrowser
 import time
@@ -27,6 +29,13 @@ class JsonObj():
         # path_to_img = (data[path_to_img][0]['img'])
         # self.path_to_img = path_to_img
 
+    def read_sur(self):
+        with open("writer.json", encoding='utf-8') as jsondata:
+            data = json.load(jsondata)
+
+        for key in data:
+            print (key)
+
         jsondata.close()
 
 
@@ -41,7 +50,27 @@ class Speech:
         # Saying things...
         engine.say(line)
         engine.runAndWait()
+        del engine
 
+# Class to operate on img files
+class Img:
+
+    def __init__(self, master, path_to_img):
+        load = Image.open("icons/" + path_to_img + ".png")
+        render = ImageTk.PhotoImage(load)
+        self.img = Label(master, image=render)
+        self.img.image = render
+        self.img.place(x=400, y=20)
+
+# Multi-threading needs to be implemented - now t2s is called before displaying output
+# def parallel(text):
+#     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+#         future_tasks = {executor.submit(Speech, text), executor.submit(typing, text)}
+#         for future in concurrent.futures.as_completed(future_tasks):
+#             try:
+#                 data = future.result()
+#             except Exception as e:
+#                 print(e)
 
 # Main class of a GUI
 class MainWindow:
@@ -52,12 +81,8 @@ class MainWindow:
         master.geometry("800x600")
         # master.configure(bg='lightgrey')
 
-        # Reserve some place for img/test img placement
-        load = Image.open("icons/king.png")
-        render = ImageTk.PhotoImage(load)
-        self.img = Label(master, image=render)
-        self.img.image = render
-        self.img.place(x=400, y=20)
+        # Reserve some place for default img placement
+        Img(master, "Stephen King")
 
         # Title screen
         self.label = Label(master, text="Speechy")
@@ -85,7 +110,7 @@ class MainWindow:
         # TO DO: Change to read from file maybe?
         # List of writers to pick...
         write = ('Stephen King', 'Adam Mickiewicz', 'Graham Masterton', 'Katarzyna Grohola',
-                 'Juliusz Slowacki KEKW', 'Norman Davies', 'Ken Follet' )
+                 'Juliusz Slowacki KEKW', 'Norman Davies', 'Ken Follett')
         write_var = StringVar(master, value=write)
 
         self.writers_list = Listbox(master, listvariable=write_var, height=6, font=("Calibri Light", 12))
@@ -95,19 +120,6 @@ class MainWindow:
         scrollbar.place(x=145, y=0)
 
         self.writers_list.config(yscrollcommand=scrollbar.set)
-
-        # Scrollbar - not working for now
-        # self.scrollbar = Scrollbar(
-        #     master,
-        #     orient='vertical',
-        #     command=self.writers_list.yview
-        # )
-        # self.writers_list['yscrollcommand'] = self.scrollbar.set
-        #
-        # self.scrollbar.grid(
-        #     column=2,
-        #     row=2,
-        #     sticky='ns')
 
         self.writers_list.place(x=25, y=170)
 
@@ -123,11 +135,14 @@ class MainWindow:
             print(selected_langs)
             Speech(selected_langs)
 
-            #Text about author
+            # Text about author
             json_obj = JsonObj(selected_langs)
             self.info_lab = Label(master, text=json_obj.writer_info, wraplength=700, justify='center')
             self.info_lab.config(font=("Calibri Light", 12))
             self.info_lab.place(x=25, y=400)
+
+            # Show author's image
+            Img(master, selected_langs)
 
             # showinfo(
             #     title='Information',
@@ -147,6 +162,7 @@ class MainWindow:
         self.close_button = Button(master, text="Close", command=master.quit)
         self.close_button.place(x=45, y=0)
 
+
     def greet(self):
         print("Writer picked!")
         Speech("Time to throw pogchamp!")
@@ -165,7 +181,5 @@ class MainWindow:
 
 root = Tk()
 my_gui = MainWindow(root)
-
-
 
 root.mainloop()
