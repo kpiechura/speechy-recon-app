@@ -3,6 +3,9 @@ from tkinter.messagebox import showinfo
 import pyttsx3
 import json
 from PIL import Image, ImageTk
+
+import os.path
+import imghdr
 import concurrent.futures
 import sys
 
@@ -57,10 +60,12 @@ class Img:
 
     def __init__(self, master, path_to_img):
         load = Image.open("icons/" + path_to_img + ".png")
+        load = load.resize((300, 345), Image.ANTIALIAS)
         render = ImageTk.PhotoImage(load)
+
         self.img = Label(master, image=render)
         self.img.image = render
-        self.img.place(x=400, y=20)
+        self.img.place(x=400, y=40)
 
 # Multi-threading needs to be implemented - now t2s is called before displaying output
 # def parallel(text):
