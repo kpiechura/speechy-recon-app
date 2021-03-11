@@ -16,9 +16,9 @@ import time
 class JsonObj():
 
     writer_info = ""
-    #path_to_img = ""
+    # path_to_img = ""
 
-    def __init__(self, writer_info):
+    def __init__(self, writer_info = "Adam Mickiewicz"):
         with open("writer.json", encoding='utf-8') as jsondata:
             data = json.load(jsondata)
 
@@ -35,11 +35,15 @@ class JsonObj():
     def read_sur(self):
         with open("writer.json", encoding='utf-8') as jsondata:
             data = json.load(jsondata)
+            authors = []
 
         for key in data:
-            print (key)
+            authors.append(key)
 
+        tuple(authors)
         jsondata.close()
+
+        return tuple(authors)
 
 
 # Class with configuration of Txt2S
@@ -53,6 +57,7 @@ class Speech:
         # Saying things...
         engine.say(line)
         engine.runAndWait()
+
         del engine
 
 # Class to operate on img files
@@ -77,8 +82,11 @@ class Img:
 #             except Exception as e:
 #                 print(e)
 
+
 # Main class of a GUI
 class MainWindow:
+
+    selected_langs = ""
 
     def __init__(self, master):
         self.master = master
@@ -87,7 +95,7 @@ class MainWindow:
         # master.configure(bg='lightgrey')
 
         # Reserve some place for default img placement
-        Img(master, "Stephen King")
+        Img(master, "default")
 
         # Title screen
         self.label = Label(master, text="Speechy")
@@ -112,13 +120,14 @@ class MainWindow:
         self.info_lab.place(x=25, y=370)
         # End of title screen
 
-        # TO DO: Change to read from file maybe?
         # List of writers to pick...
-        write = ('Stephen King', 'Adam Mickiewicz', 'Graham Masterton', 'Katarzyna Grohola',
-                 'Juliusz Slowacki KEKW', 'Norman Davies', 'Ken Follett')
+        # TO DO fix the way the read_sur method is called. Currently temporary object of JsonObj is created
+        self.json_temp = JsonObj()
+        write = self.json_temp.read_sur()
         write_var = StringVar(master, value=write)
 
         self.writers_list = Listbox(master, listvariable=write_var, height=6, font=("Calibri Light", 12))
+
         # Scrollbar for listbox
         scrollbar = Scrollbar(self.writers_list, orient="vertical")
         scrollbar.config(command=self.writers_list.yview)
@@ -127,6 +136,7 @@ class MainWindow:
         self.writers_list.config(yscrollcommand=scrollbar.set)
 
         self.writers_list.place(x=25, y=170)
+        self.json_obj = None
 
         # Handle events for list
         def items_selected(event):
@@ -141,8 +151,8 @@ class MainWindow:
             Speech(selected_langs)
 
             # Text about author
-            json_obj = JsonObj(selected_langs)
-            self.info_lab = Label(master, text=json_obj.writer_info, wraplength=700, justify='center')
+            self.json_obj = JsonObj(selected_langs)
+            self.info_lab = Label(master, text=self.json_obj.writer_info, wraplength=700, justify='center')
             self.info_lab.config(font=("Calibri Light", 12))
             self.info_lab.place(x=25, y=400)
 
@@ -152,13 +162,14 @@ class MainWindow:
             # showinfo(
             #     title='Information',
             #     message=msg)
+
             return selected_langs
 
         self.writers_list.bind('<<ListboxSelect>>', items_selected)
         # End of listbox
 
         # Buttons:
-        self.greet_button = Button(master, text="Pick", command=self.greet)
+        self.greet_button = Button(master, text="Speech", command=self.greet)
         self.greet_button.place(x=25, y=310)
 
         self.help_button = Button(master, text="About", command=self.help)
@@ -167,13 +178,16 @@ class MainWindow:
         self.close_button = Button(master, text="Close", command=master.quit)
         self.close_button.place(x=45, y=0)
 
-
     def greet(self):
         print("Writer picked!")
-        Speech("Time to throw pogchamp!")
+        try:
+            Speech(self.json_obj.writer_info)
+        except Exception as e:
+            print(e)
+        # Speech(line)
 
     def help(self):
-        message="App version: 0.1v\n\nAuthors:" \
+        message = "App version: 0.1v\n\nAuthors:" \
                 "\n\nKamil Piechura" \
                 "\n\nLukasz Bugajski" \
                 "\n\nDariusz Kowalczyk"
@@ -184,7 +198,8 @@ class MainWindow:
         )
 
 
-root = Tk()
-my_gui = MainWindow(root)
+if __name__ == '__main__':
+    root = Tk()
+    my_gui = MainWindow(root)
+    root.mainloop()
 
-root.mainloop()
