@@ -18,6 +18,7 @@ class JsonObj():
     writer_info = ""
     # path_to_img = ""
 
+    # Init with default value
     def __init__(self, writer_info = "Adam Mickiewicz"):
         with open("writer.json", encoding='utf-8') as jsondata:
             data = json.load(jsondata)
@@ -40,6 +41,7 @@ class JsonObj():
         for key in data:
             authors.append(key)
 
+        # Tuple for purpose of init of listbox with names from json file
         tuple(authors)
         jsondata.close()
 
