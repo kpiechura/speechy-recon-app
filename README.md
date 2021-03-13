@@ -12,10 +12,10 @@ App is fetching data from JSON file, parsing them and then using `pyttsx3` voice
 Make sure you have all needed modules installed. In case you don't know, just type:
 
 
-`$ pip install pyttsx3` / `$ pip install PIL` 
+`$ pip install pyttsx3` / `$ pip install pillow` 
 
 Or just simply call requirements to force pip to install all needed packages from file:
 
-`$ pip install -r requirements.txt` 
+`$ pip install -r requirements.txt` and after that module for PIL - `$ pip install pillow` 
 
 You can also just use PyCharm and manually download those from syntax guessing tool.
