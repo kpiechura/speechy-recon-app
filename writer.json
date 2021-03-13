@@ -22,5 +22,11 @@
       "info": "Ken Follett is a Welsh author of thrillers and historical novels who has sold more than 160 million copies of his works. Many of his books have achieved high ranking on best seller lists. For example, in the US, many reached the number 1 position on the New York Times Best Seller list, including Edge of Eternity, Fall of Giants, A Dangerous Fortune, The Key to Rebecca, Lie Down with Lions, Triple, Winter of the World, and World Without End.",
       "img": "icons/Stephen King.png"
     }
+  ],
+  "Krzysztof Kamil Baczynski": [
+    {
+      "info": "polski poeta czasu wojny, podchorąży Armii Krajowej, podharcmistrz Szarych Szeregów, jeden z przedstawicieli pokolenia Kolumbów, w czasie okupacji związany z pismem „Płomienie” oraz miesięcznikiem „Droga”. Zginął w czasie powstania warszawskiego jako żołnierz batalionu „Parasol” Armii Krajowej.",
+      "img": "icons/Kamil Baczynski.png"
+    }
   ]
 }
