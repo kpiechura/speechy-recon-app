@@ -14,19 +14,61 @@
   "Graham Masterton": [
     {
       "info": "Graham Masterton is a British horror author. Originally editor of Mayfair and the British edition of Penthouse, Graham Masterton's first novel The Manitou was released in 1976. This novel was adapted in 1978 for the film The Manitou. Further works garnered critical acclaim, including a Special Edgar Award by the Mystery Writers of America for Charnel House and a Silver Medal by the West Coast Review of Books for Tengu. He is also the only non-French winner of the prestigious Prix Julia Verlanger for his novel Family Portrait, an imaginative reworking of the Oscar Wilde novel The Picture of Dorian Gray. Masterton was also the editor of Scare Care, a horror anthology published for the benefit of abused children in Europe and the U.S.",
-      "img": "icons/Adam Mickiewicz.png"
+      "img": "icons/Graham Masterton.png"
     }
   ],
   "Ken Follett": [
     {
       "info": "Ken Follett is a Welsh author of thrillers and historical novels who has sold more than 160 million copies of his works. Many of his books have achieved high ranking on best seller lists. For example, in the US, many reached the number 1 position on the New York Times Best Seller list, including Edge of Eternity, Fall of Giants, A Dangerous Fortune, The Key to Rebecca, Lie Down with Lions, Triple, Winter of the World, and World Without End.",
-      "img": "icons/Stephen King.png"
+      "img": "icons/Ken Follett.png"
     }
   ],
-  "Krzysztof Kamil Baczynski": [
+  "Charles Dickens": [
     {
-      "info": "polski poeta czasu wojny, podchorąży Armii Krajowej, podharcmistrz Szarych Szeregów, jeden z przedstawicieli pokolenia Kolumbów, w czasie okupacji związany z pismem „Płomienie” oraz miesięcznikiem „Droga”. Zginął w czasie powstania warszawskiego jako żołnierz batalionu „Parasol” Armii Krajowej.",
-      "img": "icons/Kamil Baczynski.png"
+      "info": "Charles Dickens was an extraordinary man. He is best known as a novelist but he was very much more than that. He was as prominent in his other pursuits but they were not areas of life where we can still see him today. We see him as the author of such classics as Oliver Twist, David Copperfield, Great Expectations, A Tale of Two Cities, Bleak House and many others. All of his novels are English classics.",
+      "img": "icons/Charles Dickens.png"
+    }
+  ],
+  "Hans Christian Andersen": [
+    {
+      "info": "Hans Christian Andersen was a Danish playwright, travel writer, poet, novelist and story writer. His fairy tales place him as one of the world’s greatest writers ever. Written basically for children they transcend age barriers because of their universal nature: they reach the deepest levels of the human condition, each story demonstrating something profound about what it means to be a human being.",
+      "img": "icons/Hans Christian Andersen.png"
+    }
+  ],
+  "Emily Dickinson": [
+    {
+      "info": "Unknown as a poet during her lifetime, Emily Dickinson is now regarded by many as one of the most powerful voices of American culture. Her poetry has inspired many other writers, including the Brontes. In 1994 the critic, Harold Bloom, listed her among the twenty-six central writers of Western civilization. After she died her sister found the almost two thousand poems the poet had written.",
+      "img": "icons/Emily Dickinson.png"
+    }
+  ],
+  "James Joyce": [
+    {
+      "info": "James Joyce was an Irish novelist, best known for his novel, Ulysses, and his later novel, Finnegans Wake. He is regarded as one of the most influential and important writers of the 20th century. Ulysses is a seminal work in which Homer’s Odyssey is paralleled in a range of episodes and literary styles. Joyce’s collection of short stories, Dubliners, is regarded as one of the best collections of stories of the century.",
+      "img": "icons/James Joyce.png"
+    }
+  ],
+  "George Orwell": [
+    {
+      "info": "George Orwell was the pen name of Eric Blair, a twentieth-century writer, equally at home with journalism, essays, novels, literary criticism and social commentary. He was famous in all those areas but will be particularly remembered for two of his novels, Animal Farm and Nineteen Eighty Four, both among the most significant works of literature of the twentieth century.",
+      "img": "icons/George Orwell.png"
+    }
+  ],
+  "Franz Kafka": [
+    {
+      "info": "Franz Kafka was a Czech novelist and short story writer who wrote in the German language. He is universally regarded as one of the major figures of 20th century literature. His protagonists are isolated figures faced with surrealistic or bizarre predicaments and incomprehensible bureaucracies.",
+      "img": "icons/Franz Kafka.png"
+    }
+  ],
+  "Jorge Luis Borges": [
+    {
+      "info": "Jorge Luis Borges was an Argentine writer of poems, translations, essays, literary criticism and, what he is best known for, short fiction. It would be impossible even for the greatest fans of this Argentine writer to describe or explain his writing. The most one can say is that his work has inspired countless writers, none of whom have come close to capturing the magic of his work.",
+      "img": "icons/Jorge Luis Borges.png"
+    }
+  ],
+  "Ernest Hemingway": [
+    {
+      "info": "American novelist, short-story writer, journalist, and sportsman. His economical and understated style—which he termed the iceberg theory—had a strong influence on 20th-century fiction, while his adventurous lifestyle and his public image brought him admiration from later generations. Hemingway produced most of his work between the mid-1920s and the mid-1950s, and he was awarded the Nobel Prize in Literature in 1954. He published seven novels, six short-story collections, and two nonfiction works.",
+      "img": "icons/Ernest Hemingway.png"
     }
   ]
 }
