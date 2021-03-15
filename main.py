@@ -11,6 +11,9 @@ class SpeechRecog():
 
     r = sr.Recognizer()
     with sr.Microphone() as source:
+        r.adjust_for_ambient_noise(source)
+        # Debug list of micros
+        print(sr.Microphone.list_microphone_names())
         print("Listening...")
         audio = r.listen(source, timeout=2)
 
