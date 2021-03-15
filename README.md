@@ -16,6 +16,10 @@ Make sure you have all needed modules installed. In case you don't know, just ty
 
 Or just simply call requirements to force pip to install all needed packages from file:
 
-`$ pip install -r requirements.txt` and after that module for PIL - `$ pip install pillow` 
+`$ pip install -r requirements.txt` and after that module for PIL - `$ pip install pillow`
+
+## Shell script
+You can also use `get_version` script to install proper packages. 
+NOTE: WIP
 
 You can also just use PyCharm and manually download those from syntax guessing tool.
