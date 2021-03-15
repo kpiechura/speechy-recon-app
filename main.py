@@ -3,14 +3,22 @@ from tkinter.messagebox import showinfo
 import pyttsx3
 import json
 from PIL import Image, ImageTk
+import speech_recognition as sr
 
-import os.path
-import imghdr
-import concurrent.futures
-import sys
 
-import webbrowser
-import time
+# Class for speech recognition
+class SpeechRecog():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening...")
+        audio = r.listen(source, duration=3)
+
+    try:
+        text = r.recognize_google(audio)
+        print("You said: {}".format(text))
+    except:
+        print("ERROR during speech-recon!")
+
 
 # Read info from JSON obj
 class JsonObj():
@@ -174,6 +182,9 @@ class MainWindow:
         self.greet_button = Button(master, text="Speech", command=self.greet)
         self.greet_button.place(x=25, y=310)
 
+        self.greet_button = Button(master, text="Listen", command=self.greet)
+        self.greet_button.place(x=150, y=310)
+
         self.help_button = Button(master, text="About", command=self.help)
         self.help_button.place(x=0, y=0)
 
@@ -204,4 +215,3 @@ if __name__ == '__main__':
     root = Tk()
     my_gui = MainWindow(root)
     root.mainloop()
-
