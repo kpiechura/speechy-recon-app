@@ -1,3 +1,6 @@
+echo "Installing from requirements..."
+pip install -r requirements.txt
+
 echo "Installing pillow..."
 pip install pillow
 
