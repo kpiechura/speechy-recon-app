@@ -8,13 +8,14 @@ import speech_recognition as sr
 
 # Class for speech recognition
 class SpeechRecog():
+
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening...")
-        audio = r.listen(source, duration=3)
+        audio = r.listen(source, timeout=2)
 
     try:
-        text = r.recognize_google(audio)
+        text = r.recognize_google(audio, language="en-in")
         print("You said: {}".format(text))
     except:
         print("ERROR during speech-recon!")
@@ -24,7 +25,6 @@ class SpeechRecog():
 class JsonObj():
 
     writer_info = ""
-    # path_to_img = ""
 
     # Init with default value
     def __init__(self, writer_info = "Adam Mickiewicz"):
