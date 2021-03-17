@@ -3,20 +3,32 @@ from tkinter.messagebox import showinfo
 import pyttsx3
 import json
 from PIL import Image, ImageTk
+import speech_recognition as sr
 
-import os.path
-import imghdr
-import concurrent.futures
-import sys
 
-import webbrowser
-import time
+# Class for speech recognition
+class SpeechRecog():
+
+    def __init__(self):
+
+        r = sr.Recognizer()
+        with sr.Microphone() as source:
+            r.adjust_for_ambient_noise(source)
+            # Debug list of micros
+            print(sr.Microphone.list_microphone_names())
+            print("Listening...")
+            audio = r.listen(source, timeout=2)
+
+        try:
+            text = r.recognize_google(audio, language="en-in")
+            print("You said: {}".format(text))
+        except:
+            print("ERROR during speech-recon!")
 
 # Read info from JSON obj
 class JsonObj():
 
     writer_info = ""
-    # path_to_img = ""
 
     # Init with default value
     def __init__(self, writer_info = "Adam Mickiewicz"):
@@ -91,6 +103,7 @@ class MainWindow:
     selected_langs = ""
 
     def __init__(self, master):
+
         self.master = master
         master.title("Speechy App")
         master.geometry("800x600")
@@ -174,11 +187,23 @@ class MainWindow:
         self.greet_button = Button(master, text="Speech", command=self.greet)
         self.greet_button.place(x=25, y=310)
 
+        self.greet_button = Button(master, text="Listen", command=self.create_window)
+        self.greet_button.place(x=150, y=310)
+
         self.help_button = Button(master, text="About", command=self.help)
         self.help_button.place(x=0, y=0)
 
         self.close_button = Button(master, text="Close", command=master.quit)
         self.close_button.place(x=45, y=0)
+
+    # New Window
+    def create_window(self):
+        newWindow = Toplevel()
+        newWindow.geometry("800x600+275+75")
+        newWindow.resizable(height=False, width=False)
+
+        newWindow = LabelFrame(newWindow, text="TEST")
+        newWindow.place(x=10, y=10, width=300, height=300)
 
     def greet(self):
         print("Writer picked!")
@@ -203,5 +228,5 @@ class MainWindow:
 if __name__ == '__main__':
     root = Tk()
     my_gui = MainWindow(root)
-    root.mainloop()
 
+    root.mainloop()
