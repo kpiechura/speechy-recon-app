@@ -12,12 +12,17 @@ class SpeechRecog():
     def __init__(self):
 
         r = sr.Recognizer()
-        with sr.Microphone() as source:
-            r.adjust_for_ambient_noise(source)
-            # Debug list of micros
-            print(sr.Microphone.list_microphone_names())
-            print("Listening...")
-            audio = r.listen(source, timeout=2)
+        # check micro status
+        try:
+            with sr.Microphone() as source:
+                r.adjust_for_ambient_noise(source)
+
+                # Debug list of micros
+                print(sr.Microphone.list_microphone_names())
+                print("Listening...")
+                audio = r.listen(source, timeout=2)
+        except OSError as ose:
+            print("ERROR: Microphone not detected! Aborting sr module!\n" + str(ose))
 
         try:
             text = r.recognize_google(audio, language="en-in")
