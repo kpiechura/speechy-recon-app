@@ -38,6 +38,7 @@ class SpeechRecog():
             )
             print("ERROR during speech-recon!")
 
+
 # Read info from JSON obj
 class JsonObj():
 
@@ -86,6 +87,7 @@ class Speech:
         engine.runAndWait()
 
         del engine
+
 
 # Class to operate on img files
 class Img:
@@ -258,7 +260,7 @@ class MainWindow:
         E3 = Entry(newWindow, bd=1)
         E3.place(x=500, y=80)
 
-    #Pass json value
+    # Pass json value
     def greet(self):
         print("Writer picked!")
         try:
