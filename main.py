@@ -32,12 +32,12 @@ class SpeechRecog():
         try:
             text = r.recognize_google(audio, language="en-in")
             print("You said: {}".format(text))
-        except:
+        except Exception as e:
             showinfo(
                 title='Error',
                 message='ERROR: Speechy could not understand you!'
             )
-            print("ERROR during speech-recon!")
+            print("ERROR during speech-recon!" + e)
 
 
 # Read info from JSON obj
@@ -46,7 +46,7 @@ class JsonObj():
     writer_info = ""
 
     # Init with default value
-    def __init__(self, writer_info = "Adam Mickiewicz"):
+    def __init__(self, writer_info="Adam Mickiewicz"):
         with open("writer.json", encoding='utf-8') as jsondata:
             data = json.load(jsondata)
 
@@ -73,6 +73,35 @@ class JsonObj():
         jsondata.close()
 
         return tuple(authors)
+
+    # Delete authors - impl for DatabaseWindow class
+    def del_authors(self, author_name=" "):
+
+        with open("writer.json", encoding='utf-8') as jsondata:
+            data = json.load(jsondata)
+
+            found = False
+            for i in data:
+                if i == author_name:
+                    found = True
+                    data.pop(i)
+                    showinfo(
+                        title='Remove record',
+                        message='Record' + author_name + 'has been removed!'
+                    )
+                    break
+
+            if found == False:
+                showinfo(
+                    title='Remove record',
+                    message='Record cannot be found!'
+                )
+
+            # overwrite json
+            open("writer.json", "w").write(
+                 json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
+            )
+        return author_name
 
 
 # Class with configuration of Txt2S
@@ -163,6 +192,9 @@ class DatabaseWindow:
         def del_record():
             read_rec = E3.get()
             print("User want to delete" + read_rec)
+            print("JSON operation...")
+            delete = JsonObj.del_authors(str(read_rec))
+
 
         del_button = Button(dat, text="Delete", command=del_record)
         del_button.place(x=500, y=110)
