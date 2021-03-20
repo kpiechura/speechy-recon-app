@@ -22,12 +22,20 @@ class SpeechRecog():
                 print("Listening...")
                 audio = r.listen(source, timeout=2)
         except OSError as ose:
+            showinfo(
+                title='Error',
+                message='Microphone not detected!'
+            )
             print("ERROR: Microphone not detected! Aborting sr module!\n" + str(ose))
 
         try:
             text = r.recognize_google(audio, language="en-in")
             print("You said: {}".format(text))
         except:
+            showinfo(
+                title='Error',
+                message='ERROR: Speechy could not understand you!'
+            )
             print("ERROR during speech-recon!")
 
 # Read info from JSON obj
@@ -112,6 +120,7 @@ class MainWindow:
         self.master = master
         master.title("Speechy App")
         master.geometry("800x600")
+        master.resizable(0, 0)
         # master.configure(bg='lightgrey')
 
         # Reserve some place for default img placement
@@ -192,8 +201,12 @@ class MainWindow:
         self.greet_button = Button(master, text="Speech", command=self.greet)
         self.greet_button.place(x=25, y=310)
 
-        self.greet_button = Button(master, text="Listen", command=self.create_window)
-        self.greet_button.place(x=150, y=310)
+        # Temporary - still problems with sr module...
+        self.listen_button = Button(master, text="Listen", command=self.create_window)
+        self.listen_button.place(x=150, y=310)
+
+        self.database_button = Button(master, text="Database", command=self.create_window)
+        self.database_button.place(x=85, y=0)
 
         self.help_button = Button(master, text="About", command=self.help)
         self.help_button.place(x=0, y=0)
@@ -201,15 +214,51 @@ class MainWindow:
         self.close_button = Button(master, text="Close", command=master.quit)
         self.close_button.place(x=45, y=0)
 
-    # New Window
+    # New Window for database
     def create_window(self):
         newWindow = Toplevel()
-        newWindow.geometry("800x600+275+75")
+        newWindow.title("Speechy - Database")
+        newWindow.geometry("800x200+275+75")
         newWindow.resizable(height=False, width=False)
 
-        newWindow = LabelFrame(newWindow, text="TEST")
-        newWindow.place(x=10, y=10, width=300, height=300)
+        # Text label - Addition
+        lab_name = Label(newWindow, text="Add new author ")
+        lab_name.config(font=("Calibri Light", 16))
+        lab_name.place(x=25, y=10)
 
+        # Text label - author's name
+        text_author_name = Label(newWindow, text="Name: ")
+        text_author_name.config(font=("Calibri Light", 14))
+        text_author_name.place(x=25, y=50)
+
+        # Input - author's name
+        E1 = Entry(newWindow, bd=1)
+        E1.place(x=25, y=80)
+
+        # Text label - author info
+        text_author_info = Label(newWindow, text="Bio: ")
+        text_author_info.config(font=("Calibri Light", 14))
+        text_author_info.place(x=25, y=120)
+
+        # Input - author's info
+        E2 = Entry(newWindow, bd=1)
+        E2.place(x=25, y=150)
+
+        # Text label - Delete
+        lab_rem_name = Label(newWindow, text="Remove author ")
+        lab_rem_name.config(font=("Calibri Light", 16))
+        lab_rem_name.place(x=500, y=10)
+
+        # Text label - delete author
+        text_del_author = Label(newWindow, text="Name: ")
+        text_del_author.config(font=("Calibri Light", 14))
+        text_del_author.place(x=500, y=50)
+
+        # Input - author's name to delete
+        E3 = Entry(newWindow, bd=1)
+        E3.place(x=500, y=80)
+
+    #Pass json value
     def greet(self):
         print("Writer picked!")
         try:

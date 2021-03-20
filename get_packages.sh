@@ -13,5 +13,5 @@ pip install SpeechRecognition
 echo "Installing pipwin..."
 pip install pipwin
 
-echo "Installing pyaudio..."
+echo "Installing pyaudio from pipwin..."
 pipwin install pyaudio
