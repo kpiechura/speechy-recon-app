@@ -1,9 +1,10 @@
+import json
 from tkinter import *
 from tkinter.messagebox import showinfo
+
 import pyttsx3
-import json
-from PIL import Image, ImageTk
 import speech_recognition as sr
+from PIL import Image, ImageTk
 
 
 # Class for speech recognition
@@ -112,6 +113,61 @@ class Img:
 #                 print(e)
 
 
+# New window instance for database mod
+class DatabaseWindow:
+
+    def __init__(self):
+        dat = Toplevel()
+        dat.title("Speechy - Database")
+        dat.geometry("800x200+275+75")
+        dat.resizable(height=False, width=False)
+
+        # Text label - Addition
+        lab_name = Label(dat, text="Add new author ")
+        lab_name.config(font=("Calibri Light", 16))
+        lab_name.place(x=25, y=10)
+
+        # Text label - author's name
+        text_author_name = Label(dat, text="Name: ")
+        text_author_name.config(font=("Calibri Light", 14))
+        text_author_name.place(x=25, y=50)
+
+        # Input - author's name
+        E1 = Entry(dat, bd=1)
+        E1.place(x=25, y=80)
+
+        # Text label - author info
+        text_author_info = Label(dat, text="Bio: ")
+        text_author_info.config(font=("Calibri Light", 14))
+        text_author_info.place(x=25, y=120)
+
+        # Input - author's info
+        E2 = Entry(dat, bd=1)
+        E2.place(x=25, y=150)
+
+        # Text label - Delete
+        lab_rem_name = Label(dat, text="Remove author ")
+        lab_rem_name.config(font=("Calibri Light", 16))
+        lab_rem_name.place(x=500, y=10)
+
+        # Text label - delete author
+        text_del_author = Label(dat, text="Name: ")
+        text_del_author.config(font=("Calibri Light", 14))
+        text_del_author.place(x=500, y=50)
+
+        # Input - author's name to delete
+        E3 = Entry(dat, bd=1)
+        E3.place(x=500, y=80)
+
+        # Function to get from input
+        def del_record():
+            read_rec = E3.get()
+            print("User want to delete" + read_rec)
+
+        del_button = Button(dat, text="Delete", command=del_record)
+        del_button.place(x=500, y=110)
+
+
 # Main class of a GUI
 class MainWindow:
 
@@ -204,10 +260,10 @@ class MainWindow:
         self.greet_button.place(x=25, y=310)
 
         # Temporary - still problems with sr module...
-        self.listen_button = Button(master, text="Listen", command=self.create_window)
+        self.listen_button = Button(master, text="Listen", command=DatabaseWindow)
         self.listen_button.place(x=150, y=310)
 
-        self.database_button = Button(master, text="Database", command=self.create_window)
+        self.database_button = Button(master, text="Database", command=DatabaseWindow)
         self.database_button.place(x=85, y=0)
 
         self.help_button = Button(master, text="About", command=self.help)
@@ -215,50 +271,6 @@ class MainWindow:
 
         self.close_button = Button(master, text="Close", command=master.quit)
         self.close_button.place(x=45, y=0)
-
-    # New Window for database
-    def create_window(self):
-        newWindow = Toplevel()
-        newWindow.title("Speechy - Database")
-        newWindow.geometry("800x200+275+75")
-        newWindow.resizable(height=False, width=False)
-
-        # Text label - Addition
-        lab_name = Label(newWindow, text="Add new author ")
-        lab_name.config(font=("Calibri Light", 16))
-        lab_name.place(x=25, y=10)
-
-        # Text label - author's name
-        text_author_name = Label(newWindow, text="Name: ")
-        text_author_name.config(font=("Calibri Light", 14))
-        text_author_name.place(x=25, y=50)
-
-        # Input - author's name
-        E1 = Entry(newWindow, bd=1)
-        E1.place(x=25, y=80)
-
-        # Text label - author info
-        text_author_info = Label(newWindow, text="Bio: ")
-        text_author_info.config(font=("Calibri Light", 14))
-        text_author_info.place(x=25, y=120)
-
-        # Input - author's info
-        E2 = Entry(newWindow, bd=1)
-        E2.place(x=25, y=150)
-
-        # Text label - Delete
-        lab_rem_name = Label(newWindow, text="Remove author ")
-        lab_rem_name.config(font=("Calibri Light", 16))
-        lab_rem_name.place(x=500, y=10)
-
-        # Text label - delete author
-        text_del_author = Label(newWindow, text="Name: ")
-        text_del_author.config(font=("Calibri Light", 14))
-        text_del_author.place(x=500, y=50)
-
-        # Input - author's name to delete
-        E3 = Entry(newWindow, bd=1)
-        E3.place(x=500, y=80)
 
     # Pass json value
     def greet(self):
