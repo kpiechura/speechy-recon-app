@@ -38,7 +38,7 @@ class SpeechRecog():
                 title='Error',
                 message='ERROR: Speechy could not understand you!'
             )
-            print("ERROR during speech-recon!" + e)
+            print("ERROR during speech-recon!" + str(e))
 
 
 # Read info from JSON obj
