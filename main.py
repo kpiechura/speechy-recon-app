@@ -32,6 +32,7 @@ class SpeechRecog():
         try:
             text = r.recognize_google(audio, language="en-in")
             print("You said: {}".format(text))
+
         except Exception as e:
             showinfo(
                 title='Error',
@@ -291,8 +292,8 @@ class MainWindow:
         self.greet_button = Button(master, text="Speech", command=self.greet)
         self.greet_button.place(x=25, y=310)
 
-        # Temporary - still problems with sr module...
-        self.listen_button = Button(master, text="Listen", command=DatabaseWindow)
+        # Calling sr module - further pass to fun required
+        self.listen_button = Button(master, text="Listen", command=SpeechRecog)
         self.listen_button.place(x=150, y=310)
 
         self.database_button = Button(master, text="Database", command=DatabaseWindow)
