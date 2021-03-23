@@ -48,9 +48,13 @@ class JsonObj:
 
     # Init with default value
     def __init__(self, writer_info=""):
+      
         with open("writer.json", encoding='utf-8') as jsondata:
             data = json.load(jsondata)
 
+        # NOTE: very temporar solution! Needs to be checked before release!
+        if "Adam Mickiewicz" not in data:
+            writer_info = "Franz Kafka"
         # Part to show proper info about writer
         if writer_info:
             print(data[writer_info][0]['info'])
