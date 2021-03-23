@@ -8,7 +8,7 @@ from PIL import Image, ImageTk
 
 
 # Class for speech recognition
-class SpeechRecog():
+class SpeechRecog:
 
     def __init__(self):
 
@@ -42,7 +42,7 @@ class SpeechRecog():
 
 
 # Read info from JSON obj
-class JsonObj():
+class JsonObj:
 
     writer_info = ""
 
@@ -51,6 +51,9 @@ class JsonObj():
         with open("writer.json", encoding='utf-8') as jsondata:
             data = json.load(jsondata)
 
+        # NOTE: very temporar solution! Needs to be checked before release!
+        if "Adam Mickiewicz" not in data:
+            writer_info = "Franz Kafka"
         # Part to show proper info about writer
         print(data[writer_info][0]['info'])
         writer_info = (data[writer_info][0]['info'])
@@ -77,7 +80,6 @@ class JsonObj():
 
     # Delete authors - impl for DatabaseWindow class
     def del_authors(self, author_name=" "):
-
         with open("writer.json", encoding='utf-8') as jsondata:
             data = json.load(jsondata)
 
@@ -88,7 +90,7 @@ class JsonObj():
                     data.pop(i)
                     showinfo(
                         title='Remove record',
-                        message='Record' + author_name + 'has been removed!'
+                        message='Record ' + author_name + ' has been removed!'
                     )
                     break
 
@@ -147,6 +149,7 @@ class Img:
 class DatabaseWindow:
 
     def __init__(self):
+        self.json_obj = JsonObj()
         dat = Toplevel()
         dat.title("Speechy - Database")
         dat.geometry("800x200+275+75")
@@ -191,11 +194,13 @@ class DatabaseWindow:
 
         # Function to get from input
         def del_record():
+            # json obj instance
             read_rec = E3.get()
-            print("User want to delete" + read_rec)
-            print("JSON operation...")
-            delete = JsonObj.del_authors(str(read_rec))
 
+            print(read_rec)
+            print("User want to delete " + read_rec)
+            print("JSON operation...")
+            delete = self.json_obj.del_authors(read_rec)
 
         del_button = Button(dat, text="Delete", command=del_record)
         del_button.place(x=500, y=110)
