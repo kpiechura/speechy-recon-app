@@ -47,7 +47,8 @@ class JsonObj:
     writer_info = ""
 
     # Init with default value
-    def __init__(self, writer_info="Adam Mickiewicz"):
+    def __init__(self, writer_info=""):
+      
         with open("writer.json", encoding='utf-8') as jsondata:
             data = json.load(jsondata)
 
@@ -55,9 +56,10 @@ class JsonObj:
         if "Adam Mickiewicz" not in data:
             writer_info = "Franz Kafka"
         # Part to show proper info about writer
-        print(data[writer_info][0]['info'])
-        writer_info = (data[writer_info][0]['info'])
-        self.writer_info = writer_info
+        if writer_info:
+            print(data[writer_info][0]['info'])
+            writer_info = (data[writer_info][0]['info'])
+            self.writer_info = writer_info
 
         # Part for loading proper img
         # print(data[path_to_img][0]['img'])
