@@ -8,7 +8,7 @@ from PIL import Image, ImageTk
 
 
 # Class for speech recognition
-class SpeechRecog():
+class SpeechRecog:
 
     def __init__(self):
 
@@ -32,24 +32,28 @@ class SpeechRecog():
         try:
             text = r.recognize_google(audio, language="en-in")
             print("You said: {}".format(text))
-        except:
+
+        except Exception as e:
             showinfo(
                 title='Error',
                 message='ERROR: Speechy could not understand you!'
             )
-            print("ERROR during speech-recon!")
+            print("ERROR during speech-recon!" + str(e))
 
 
 # Read info from JSON obj
-class JsonObj():
+class JsonObj:
 
     writer_info = ""
 
     # Init with default value
-    def __init__(self, writer_info = "Adam Mickiewicz"):
+    def __init__(self, writer_info="Adam Mickiewicz"):
         with open("writer.json", encoding='utf-8') as jsondata:
             data = json.load(jsondata)
 
+        # NOTE: very temporar solution! Needs to be checked before release!
+        if "Adam Mickiewicz" not in data:
+            writer_info = "Franz Kafka"
         # Part to show proper info about writer
         print(data[writer_info][0]['info'])
         writer_info = (data[writer_info][0]['info'])
@@ -73,6 +77,34 @@ class JsonObj():
         jsondata.close()
 
         return tuple(authors)
+
+    # Delete authors - impl for DatabaseWindow class
+    def del_authors(self, author_name=" "):
+        with open("writer.json", encoding='utf-8') as jsondata:
+            data = json.load(jsondata)
+
+            found = False
+            for i in data:
+                if i == author_name:
+                    found = True
+                    data.pop(i)
+                    showinfo(
+                        title='Remove record',
+                        message='Record ' + author_name + ' has been removed!'
+                    )
+                    break
+
+            if found == False:
+                showinfo(
+                    title='Remove record',
+                    message='Record cannot be found!'
+                )
+
+            # overwrite json
+            open("writer.json", "w").write(
+                 json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
+            )
+        return author_name
 
 
 # Class with configuration of Txt2S
@@ -117,6 +149,7 @@ class Img:
 class DatabaseWindow:
 
     def __init__(self):
+        self.json_obj = JsonObj()
         dat = Toplevel()
         dat.title("Speechy - Database")
         dat.geometry("800x200+275+75")
@@ -161,8 +194,13 @@ class DatabaseWindow:
 
         # Function to get from input
         def del_record():
+            # json obj instance
             read_rec = E3.get()
-            print("User want to delete" + read_rec)
+
+            print(read_rec)
+            print("User want to delete " + read_rec)
+            print("JSON operation...")
+            delete = self.json_obj.del_authors(read_rec)
 
         del_button = Button(dat, text="Delete", command=del_record)
         del_button.place(x=500, y=110)
@@ -259,8 +297,8 @@ class MainWindow:
         self.greet_button = Button(master, text="Speech", command=self.greet)
         self.greet_button.place(x=25, y=310)
 
-        # Temporary - still problems with sr module...
-        self.listen_button = Button(master, text="Listen", command=DatabaseWindow)
+        # Calling sr module - further pass to fun required
+        self.listen_button = Button(master, text="Listen", command=SpeechRecog)
         self.listen_button.place(x=150, y=310)
 
         self.database_button = Button(master, text="Database", command=DatabaseWindow)
