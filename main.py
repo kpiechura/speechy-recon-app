@@ -1,4 +1,5 @@
 import json
+import os
 from tkinter import *
 from tkinter.messagebox import showinfo
 
@@ -44,27 +45,33 @@ class SpeechRecog:
 # Read info from JSON obj
 class JsonObj:
 
-    writer_info = ""
+    writer_info = " "
 
     # Init with default value
     def __init__(self, writer_info=""):
-      
-        with open("writer.json", encoding='utf-8') as jsondata:
-            data = json.load(jsondata)
 
-        # NOTE: very temporar solution! Needs to be checked before release!
-        if "Adam Mickiewicz" not in data:
-            writer_info = "Franz Kafka"
+        # Checking if database instance exists
+        try:
+            with open("writer.json", encoding='utf-8') as jsondata:
+                data = json.load(jsondata)
+        except:
+            showinfo(
+                title='Database instance error',
+                message='Database instance cannot be found! Aborting!'
+            )
+            exit(-1)
+
         # Part to show proper info about writer
-        if writer_info:
-            print(data[writer_info][0]['info'])
-            writer_info = (data[writer_info][0]['info'])
-            self.writer_info = writer_info
-
-        # Part for loading proper img
-        # print(data[path_to_img][0]['img'])
-        # path_to_img = (data[path_to_img][0]['img'])
-        # self.path_to_img = path_to_img
+        try:
+            if writer_info:
+                print(data[writer_info][0]['info'])
+                writer_info = (data[writer_info][0]['info'])
+                self.writer_info = writer_info
+        except:
+            showinfo(
+                title='Database read fault',
+                message='Database cannot found that record!'
+            )
 
     def read_sur(self):
         with open("writer.json", encoding='utf-8') as jsondata:
@@ -102,11 +109,28 @@ class JsonObj:
                     message='Record cannot be found!'
                 )
 
-            # overwrite json
+            # overwrite json file with latest changes
             open("writer.json", "w").write(
                  json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
             )
+
         return author_name
+
+    # Adding new key with author's name and info to json
+    def insert_author_name(self, author_name=" ", author_info=" "):
+        with open("writer.json", encoding='utf-8') as jsondata:
+            data = json.load(jsondata)
+
+            data[author_name] = [{"img": "icons/default_avatar.png", "info": author_info}]
+            # overwrite json
+            open("writer.json", "w").write(
+                json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
+            )
+
+            showinfo(
+                title='Add record',
+                message='Record ' + author_name + ' added to database!'
+            )
 
 
 # Class with configuration of Txt2S
@@ -128,7 +152,13 @@ class Speech:
 class Img:
 
     def __init__(self, master, path_to_img):
-        load = Image.open("icons/" + path_to_img + ".png")
+
+        # If there is no image for newly created author, call default avatar img
+        try:
+            load = Image.open("icons/" + path_to_img + ".png")
+        except:
+            load = Image.open("icons/default_avatar.png")
+
         load = load.resize((300, 345), Image.ANTIALIAS)
         render = ImageTk.PhotoImage(load)
 
@@ -154,7 +184,7 @@ class DatabaseWindow:
         self.json_obj = JsonObj()
         dat = Toplevel()
         dat.title("Speechy - Database")
-        dat.geometry("800x200+275+75")
+        dat.geometry("800x250+275+75")
         dat.resizable(height=False, width=False)
 
         # Text label - Addition
@@ -198,11 +228,25 @@ class DatabaseWindow:
         def del_record():
             # json obj instance
             read_rec = E3.get()
-
-            print(read_rec)
-            print("User want to delete " + read_rec)
+            print("User want to delete" + read_rec)
             print("JSON operation...")
-            delete = self.json_obj.del_authors(read_rec)
+            delete = self.json_obj.del_authors(str(read_rec))
+
+        # Function to get from input
+        def add_record_name():
+            # Reading input from Name and Bio fields
+            read_rec_name = E1.get()
+            read_rec_info = E2.get()
+
+            print("User want to add" + read_rec_name)
+            print("JSON operation...")
+
+            # Database update
+            add = self.json_obj.insert_author_name(str(read_rec_name), str(read_rec_info))
+
+        # Buttons for records addition and removal
+        add_name_button = Button(dat, text="Add", command=add_record_name)
+        add_name_button.place(x=25, y=180)
 
         del_button = Button(dat, text="Delete", command=del_record)
         del_button.place(x=500, y=110)
@@ -211,7 +255,7 @@ class DatabaseWindow:
 # Main class of a GUI
 class MainWindow:
 
-    selected_langs = ""
+    selected_langs = " "
 
     def __init__(self, master):
 
@@ -286,10 +330,6 @@ class MainWindow:
             # Show author's image
             Img(master, selected_langs)
 
-            # showinfo(
-            #     title='Information',
-            #     message=msg)
-
             return selected_langs
 
         self.writers_list.bind('<<ListboxSelect>>', items_selected)
@@ -322,11 +362,11 @@ class MainWindow:
         # Speech(line)
 
     def help(self):
-        message = "App version: 0.1v\n\nAuthors:" \
+        message = "App version: 0.5v\n\nAuthors:" \
                 "\n\nKamil Piechura" \
                 "\n\nLukasz Bugajski" \
                 "\n\nDariusz Kowalczyk"
-        Speech(message)
+        # Speech(message)
         showinfo(
             title='About',
             message=message

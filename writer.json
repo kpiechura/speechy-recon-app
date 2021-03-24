@@ -70,11 +70,5 @@
             "img": "icons/Ken Follett.png",
             "info": "Ken Follett is a Welsh author of thrillers and historical novels who has sold more than 160 million copies of his works. Many of his books have achieved high ranking on best seller lists. For example, in the US, many reached the number 1 position on the New York Times Best Seller list, including Edge of Eternity, Fall of Giants, A Dangerous Fortune, The Key to Rebecca, Lie Down with Lions, Triple, Winter of the World, and World Without End."
         }
-    ],
-    "Stephen King": [
-        {
-            "img": "icons/Stephen King.png",
-            "info": "Stephen King is an American author of horror, supernatural fiction, suspense, crime, science-fiction, and fantasy novels. His books have sold more than 350 million copies, and many have been adapted into films, television series, miniseries, and comic books. King has published 62 novels, including seven under the pen name Richard Bachman, and five non-fiction books. He has also written approximately 200 short stories, most of which have been published in book collections."
-        }
     ]
 }
