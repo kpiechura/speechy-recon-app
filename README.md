@@ -8,6 +8,8 @@ App is fetching data from JSON file, parsing them and then using `pyttsx3` voice
 * `pyttsx3` module
 * `PIL` module
 
+*NOTE*: To enlist full requirements, please see `requirements.txt` file and `get_version` shell script.
+
 ## Usage
 Make sure you have all needed modules installed. In case you don't know, just type:
 
@@ -20,6 +22,6 @@ Or just simply call requirements to force pip to install all needed packages fro
 
 ## Shell script
 You can also use `get_version` script to install proper packages. 
-NOTE: WIP
+*NOTE*: WIP
 
 You can also just use PyCharm and manually download those from syntax guessing tool.
