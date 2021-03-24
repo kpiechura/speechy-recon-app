@@ -106,7 +106,19 @@ class JsonObj:
             open("writer.json", "w").write(
                  json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
             )
+
         return author_name
+
+    # Adding new key with author's name to json
+    def insert_author_name(self, author_name=" "):
+        with open("writer.json", encoding='utf-8') as jsondata:
+            data = json.load(jsondata)
+
+            data.update({author_name:"ADDED_VALUE"})
+            # overwrite json
+            open("writer.json", "w").write(
+                json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
+            )
 
 
 # Class with configuration of Txt2S
@@ -198,11 +210,21 @@ class DatabaseWindow:
         def del_record():
             # json obj instance
             read_rec = E3.get()
-
-            print(read_rec)
-            print("User want to delete " + read_rec)
+            print("User want to delete" + read_rec)
             print("JSON operation...")
-            delete = self.json_obj.del_authors(read_rec)
+            delete = self.json_obj.del_authors(str(read_rec))
+            print("UUSU" + str(delete))
+
+        # Function to get from input
+        def add_record_name():
+            read_rec = E1.get()
+            print("User want to add" + read_rec)
+            print("JSON operation...")
+            add = self.json_obj.insert_author_name(str(read_rec))
+            print("UUSU" + str(add))
+
+        add_name_button = Button(dat, text="Add", command=add_record_name)
+        add_name_button.place(x=250, y=110)
 
         del_button = Button(dat, text="Delete", command=del_record)
         del_button.place(x=500, y=110)
