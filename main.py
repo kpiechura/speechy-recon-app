@@ -153,6 +153,8 @@ class Speech:
     def __init__(self, line):
         engine = pyttsx3.init()
         self.change_voice(engine, "en_US", "VoiceGenderFemale")
+        # Setting speeching speed
+        engine.setProperty('rate', 180)
         voice = engine.getProperty('voice')
         engine.setProperty(voice, "!v/f1")
 
