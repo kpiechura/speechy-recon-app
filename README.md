@@ -25,3 +25,7 @@ You can also use `get_version` script to install proper packages.
 *NOTE*: WIP
 
 You can also just use PyCharm and manually download those from syntax guessing tool.
+
+## T2S en-US package
+If you are using Windows with polish language pack, please expect sloppy and weird pronunciation - text-to-speech module installation is based on provided language pack in system. Consider installing en-US Windows language pack from this Microsoft instruction: 
+https://support.microsoft.com/en-us/windows/language-packs-for-windows-a5094319-a92d-18de-5b53-1cfc697cfca8
