@@ -33,6 +33,8 @@ class SpeechRecog:
         try:
             text = r.recognize_google(audio, language="en-in")
             print("You said: {}".format(text))
+            # self.json_obj = JsonObj.__init__(text)
+            # print(self.json_obj.writer_info)
 
         except Exception as e:
             showinfo(
@@ -136,8 +138,21 @@ class JsonObj:
 # Class with configuration of Txt2S
 class Speech:
 
+    # default config for t2s module
+    def change_voice(self, engine, language, gender='VoiceGenderFemale'):
+        for voice in engine.getProperty('voices'):
+            if language in voice.languages and gender == voice.gender:
+                engine.setProperty('voice', voice.id)
+                return True
+
+        # showinfo(
+        #     title='Speechy - language',
+        #     message='NOTE: Please, consider installing en_US language pack'
+        # )
+
     def __init__(self, line):
         engine = pyttsx3.init()
+        self.change_voice(engine, "en_US", "VoiceGenderFemale")
         voice = engine.getProperty('voice')
         engine.setProperty(voice, "!v/f1")
 
