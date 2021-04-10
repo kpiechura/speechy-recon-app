@@ -28,8 +28,10 @@ if [ $? -eq 0 ]; then
 	format_status
 else
 	format_status
-    echo "Pip not installed"
+    echo "Pip not installed. Pip is required to run speechy! ABORTING!"
 	format_status
+	sleep 1
+	exit 1
 fi
 sleep 5
 
