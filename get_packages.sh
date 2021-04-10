@@ -35,11 +35,11 @@ echo "Checking for pip instance..."
 pip --version
 if [ $? -eq 0 ]; then
 	format_status
-    echo "Pip is installed. Proceeding..."
+    	echo "Pip is installed. Proceeding..."
 	format_status
 else
 	format_status
-    echo "Pip not installed. Pip is required to run speechy! Trying to get via wget...!"
+    	echo "Pip not installed. Pip is required to run speechy! Trying to get via wget...!"
 	format_status
 	
 	sleep 1
