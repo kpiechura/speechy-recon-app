@@ -8,6 +8,8 @@ App is fetching data from JSON file, parsing them and then using `pyttsx3` voice
 * `pyttsx3` module
 * `PIL` module
 
+*Application is compatible on all OS platforms with required python packages.*
+
 *NOTE*: To enlist full requirements, please see `requirements.txt` file and `get_version` shell script.
 
 ## Usage
