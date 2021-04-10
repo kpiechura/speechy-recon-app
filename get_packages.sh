@@ -1,9 +1,11 @@
 #!/bin/bash
 
-function format_status() {
-	
-	echo "--------------------------------"
+url=https://bootstrap.pypa.io/get-pip.py
 
+function format_status() {
+
+	echo "--------------------------------"
+	
 }
 
 function check_insta_status() {
@@ -14,11 +16,20 @@ function check_insta_status() {
 		format_status
 	else
 		format_status
-		echo "Unknown error during installation"
+		echo "Unknown error during installation. ABORTING!"
 		format_status
+		sleep 1
+		exit 1
 	fi
 }
 
+function try_pip_from_url() {
+
+	format_status
+	wget $url
+	check_insta_status
+
+}
 
 echo "Checking for pip instance..."
 pip --version
@@ -28,10 +39,11 @@ if [ $? -eq 0 ]; then
 	format_status
 else
 	format_status
-    echo "Pip not installed. Pip is required to run speechy! ABORTING!"
+    echo "Pip not installed. Pip is required to run speechy! Trying to get via wget...!"
 	format_status
+	
 	sleep 1
-	exit 1
+	try_pip_from_url
 fi
 sleep 5
 
