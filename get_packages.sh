@@ -51,33 +51,33 @@ echo "Installing from requirements..."
 
 pip install -r requirements.txt
 
-check_insta_status()
+check_insta_status
 
 echo "Installing pillow..."
 pip install pillow
 
-check_insta_status()
+check_insta_status
 
 
 echo "Installing pyttsx3..."
 pip install pyttsx3
 
-check_insta_status()
+check_insta_status
 
 
 echo "Installing SpeechRecognition..."
 pip install SpeechRecognition
 
-check_insta_status()
+check_insta_status
 
 
 echo "Installing pipwin..."
 pip install pipwin
 
-check_insta_status()
+check_insta_status
 
 
 echo "Installing pyaudio from pipwin..."
 pipwin install pyaudio
 
-check_insta_status()
+check_insta_status
