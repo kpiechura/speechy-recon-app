@@ -24,7 +24,8 @@ Or just simply call requirements to force pip to install all needed packages fro
 
 ## Shell script
 You can also use `get_version` script to install proper packages. 
-*NOTE*: WIP
+
+*NOTE*: Run script with root/admin privileges. Still in WIP state.
 
 You can also just use PyCharm and manually download those from syntax guessing tool.
 
