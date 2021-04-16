@@ -11,9 +11,10 @@ from PIL import Image, ImageTk
 # Class for speech recognition
 class SpeechRecog:
 
-    def __init__(self):
+    def __init__(self, window):
 
         r = sr.Recognizer()
+        text = ''
         # check micro status
         try:
             with sr.Microphone() as source:
@@ -29,6 +30,12 @@ class SpeechRecog:
                 message='Microphone not detected!'
             )
             print("ERROR: Microphone not detected! Aborting sr module!\n" + str(ose))
+        except Exception as e:
+            showinfo(
+                title='Error',
+                message='ERROR: Speechy could not hear you!'
+            )
+            print("ERROR during speech-recon!" + str(e))
 
         try:
             text = r.recognize_google(audio, language="en-in")
@@ -42,6 +49,15 @@ class SpeechRecog:
                 message='ERROR: Speechy could not understand you!'
             )
             print("ERROR during speech-recon!" + str(e))
+
+        # Text about author
+        self.json_obj = JsonObj(text)
+        self.info_lab = Label(window, text=self.json_obj.writer_info, wraplength=700, justify='center')
+        self.info_lab.config(font=("Calibri Light", 12))
+        self.info_lab.place(x=25, y=400)
+
+        # Show author's image
+        Img(window, text)
 
 
 # Read info from JSON obj
@@ -357,7 +373,7 @@ class MainWindow:
         self.greet_button.place(x=25, y=310)
 
         # Calling sr module - further pass to fun required
-        self.listen_button = Button(master, text="Listen", command=SpeechRecog)
+        self.listen_button = Button(master, text="Listen", command=self.speech_recog)
         self.listen_button.place(x=150, y=310)
 
         self.database_button = Button(master, text="Database", command=DatabaseWindow)
@@ -389,6 +405,10 @@ class MainWindow:
             message=message
         )
 
+    def speech_recog(self):
+
+        recognizer = SpeechRecog(self.master)
+        self.json_obj = recognizer.json_obj
 
 if __name__ == '__main__':
     root = Tk()
