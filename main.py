@@ -7,23 +7,17 @@ import re
 import pyttsx3
 import speech_recognition as sr
 from PIL import Image, ImageTk
+import wikipedia
 from simple_image_download import simple_image_download as simp
 
 
 class GetGoogleImg:
 
     def __init__(self, img_key):
-        response = simp.simple_image_download
 
+        response = simp.simple_image_download
         # try to get author's photo from google graphics
-        try:
-            response().download(img_key, 1)
-        except Exception as e:
-            showinfo(
-                title='Error',
-                message='Speechy could not get your author image from Google! '
-                        'Using default avatar!'
-            )
+        response().download(img_key, 1)
 
 
 # Class for speech recognition
@@ -152,11 +146,20 @@ class JsonObj:
         return author_name
 
     # Adding new key with author's name and info to json
-    def insert_author_name(self, author_name=" ", author_info=" "):
+    def insert_author_name(self, author_name=" ", input_author_info=" "):
         with open("writer.json", encoding='utf-8') as jsondata:
             data = json.load(jsondata)
 
+            # get picture from Google
             GetGoogleImg(author_name)
+
+            # if wiki summary is available --> insert that
+            # if not --> insert input set by user
+            try:
+                author_info = (wikipedia.summary(author_name, sentences=4))
+            except:
+                author_info = input_author_info
+
             data[author_name] = [{"img": "icons/default_avatar.png", "info": author_info}]
             # overwrite json
             open("writer.json", "w").write(
@@ -165,7 +168,7 @@ class JsonObj:
 
             showinfo(
                 title='Add record',
-                message='Record ' + author_name + ' added to database!'
+                message='Record ' + author_name + ' added to database! Added with found Google image!'
             )
 
 
@@ -204,6 +207,12 @@ class Img:
 
     def __init__(self, master, path_to_img):
 
+        # check var for one word instance
+        one_word = False
+
+        if " " not in path_to_img:
+            one_word = True
+
         # split name to make possible to get via catalog path
         split_name = re.findall('.[^A-Z]*', path_to_img)
 
@@ -211,11 +220,35 @@ class Img:
         try:
             load = Image.open("icons/" + path_to_img + ".png")
         except:
+
             # get image from Google Search engine
-            load = Image.open("simple_images/"
-                              + split_name[0].replace(" ", "")
-                              + "_" + split_name[1] + "/"
-                              + path_to_img + "_1.jpeg")
+            # check if name given is one-word/many-word
+            if one_word:
+                try:
+                    load = Image.open("simple_images/"
+                                      + path_to_img
+                                      + "/"
+                                      + path_to_img + "_1.jpeg")
+                except:
+                    showinfo(
+                        title='Error',
+                        message='Speechy could not get your author image from Google! '
+                                'Using default avatar!'
+                    )
+                    load = Image.open("icons/default_avatar.png")
+            else:
+                try:
+                    load = Image.open("simple_images/"
+                                      + split_name[0].replace(" ", "")
+                                      + "_" + split_name[1] + "/"
+                                      + path_to_img + "_1.jpeg")
+                except:
+                    showinfo(
+                        title='Error',
+                        message='Speechy could not get your author image from Google! '
+                                'Using default avatar!'
+                    )
+                    load = Image.open("icons/default_avatar.png")
 
         load = load.resize((300, 345), Image.ANTIALIAS)
         render = ImageTk.PhotoImage(load)
@@ -420,7 +453,7 @@ class MainWindow:
         # Speech(line)
 
     def help(self):
-        message = "App version: 0.5v\n\nAuthors:" \
+        message = "App version: 0.6v\n\nAuthors:" \
                   "\n\nKamil Piechura" \
                   "\n\nLukasz Bugajski" \
                   "\n\nDariusz Kowalczyk"
