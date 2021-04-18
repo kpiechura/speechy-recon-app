@@ -62,7 +62,6 @@ class SpeechRecog:
 
 # Read info from JSON obj
 class JsonObj:
-
     writer_info = " "
 
     # Init with default value
@@ -129,7 +128,7 @@ class JsonObj:
 
             # overwrite json file with latest changes
             open("writer.json", "w").write(
-                 json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
+                json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
             )
 
         return author_name
@@ -198,6 +197,7 @@ class Img:
         self.img = Label(master, image=render)
         self.img.image = render
         self.img.place(x=400, y=40)
+
 
 # Multi-threading needs to be implemented - now t2s is called before displaying output
 # def parallel(text):
@@ -287,7 +287,6 @@ class DatabaseWindow:
 
 # Main class of a GUI
 class MainWindow:
-
     selected_langs = " "
 
     def __init__(self, master):
@@ -396,9 +395,9 @@ class MainWindow:
 
     def help(self):
         message = "App version: 0.5v\n\nAuthors:" \
-                "\n\nKamil Piechura" \
-                "\n\nLukasz Bugajski" \
-                "\n\nDariusz Kowalczyk"
+                  "\n\nKamil Piechura" \
+                  "\n\nLukasz Bugajski" \
+                  "\n\nDariusz Kowalczyk"
         # Speech(message)
         showinfo(
             title='About',
@@ -409,6 +408,7 @@ class MainWindow:
 
         recognizer = SpeechRecog(self.master)
         self.json_obj = recognizer.json_obj
+
 
 if __name__ == '__main__':
     root = Tk()
