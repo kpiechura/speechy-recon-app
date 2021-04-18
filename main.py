@@ -2,6 +2,7 @@ import json
 import os
 from tkinter import *
 from tkinter.messagebox import showinfo
+import re
 
 import pyttsx3
 import speech_recognition as sr
@@ -155,6 +156,7 @@ class JsonObj:
         with open("writer.json", encoding='utf-8') as jsondata:
             data = json.load(jsondata)
 
+            GetGoogleImg(author_name)
             data[author_name] = [{"img": "icons/default_avatar.png", "info": author_info}]
             # overwrite json
             open("writer.json", "w").write(
@@ -202,11 +204,18 @@ class Img:
 
     def __init__(self, master, path_to_img):
 
+        # split name to make possible to get via catalog path
+        split_name = re.findall('.[^A-Z]*', path_to_img)
+
         # If there is no image for newly created author, call default avatar img
         try:
             load = Image.open("icons/" + path_to_img + ".png")
         except:
-            load = Image.open("icons/default_avatar.png")
+            # get image from Google Search engine
+            load = Image.open("simple_images/"
+                              + split_name[0].replace(" ", "")
+                              + "_" + split_name[1] + "/"
+                              + path_to_img + "_1.jpeg")
 
         load = load.resize((300, 345), Image.ANTIALIAS)
         render = ImageTk.PhotoImage(load)
