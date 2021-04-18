@@ -6,6 +6,23 @@ from tkinter.messagebox import showinfo
 import pyttsx3
 import speech_recognition as sr
 from PIL import Image, ImageTk
+from simple_image_download import simple_image_download as simp
+
+
+class GetGoogleImg:
+
+    def __init__(self, img_key):
+        response = simp.simple_image_download
+
+        # try to get author's photo from google graphics
+        try:
+            response().download(img_key, 1)
+        except Exception as e:
+            showinfo(
+                title='Error',
+                message='Speechy could not get your author image from Google! '
+                        'Using default avatar!'
+            )
 
 
 # Class for speech recognition
@@ -411,6 +428,7 @@ class MainWindow:
 
 
 if __name__ == '__main__':
+
     root = Tk()
     my_gui = MainWindow(root)
 
