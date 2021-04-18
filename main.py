@@ -120,7 +120,7 @@ class JsonObj:
                     )
                     break
 
-            if found == False:
+            if not found:
                 showinfo(
                     title='Remove record',
                     message='Record cannot be found!'
