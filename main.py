@@ -276,7 +276,12 @@ class DatabaseWindow:
         self.json_obj = JsonObj()
         dat = Toplevel()
         dat.title("Speechy - Database")
-        dat.geometry("800x250+275+75")
+        # setting window pos
+        screen_width = dat.winfo_screenwidth()
+        screen_height = dat.winfo_screenheight()
+        x = (screen_width / 2) - (800 / 2)
+        y = (screen_height / 2) - (250 / 2)
+        dat.geometry('%dx%d+%d+%d' % (800, 250, x, y+220))
         dat.resizable(height=False, width=False)
 
         # Text label - Addition
@@ -352,7 +357,13 @@ class MainWindow:
 
         self.master = master
         master.title("Speechy App")
-        master.geometry("800x600")
+
+        # setting window pos
+        screen_width = master.winfo_screenwidth()
+        screen_height = master.winfo_screenheight()
+        x = (screen_width / 2) - (800 / 2)
+        y = (screen_height / 2) - (600 / 2)
+        master.geometry('%dx%d+%d+%d' % (800, 600, x, y))
         master.resizable(0, 0)
         # master.configure(bg='lightgrey')
 
