@@ -1,18 +1,26 @@
 # speechy-recon-app
 Project targets into text-to-speech/voice recognition implementation for database of writers and their novels.
 App is fetching data from JSON file, parsing them and then using `pyttsx3` voice engine to read aloud. 
+User can also search database by reading aloud name and surname of the author. This functionality is possible due to `speech-recognition` module usage.
+
+*NOTE*: from 0.6 version release, records added by user are now automatically proccessed with two stages:
+* fetching image from Google of choosen writer
+* fetching summary from wikipedia of choosen writer
 
 ## Requirements
 * `Python` >= 3.3
 * `Pip`
 * `pyttsx3` module
 * `PIL` module
+* `wikipedia` module
+* `simple img download` module
+* more...
 
 *Application is compatible on all OS platforms with required python packages.*
 
 *NOTE*: To enlist full requirements, please see `requirements.txt` file and `get_version` shell script.
 
-## Usage
+## Installation
 Make sure you have all needed modules installed. In case you don't know, just type:
 
 
