@@ -22,7 +22,7 @@ User can also search database by reading aloud name and surname of the author. T
 
 ## User Guide
 * To show bio and image for author, select right name from database list
-* To request speechy to read his bio aloud, click `Speech` button
+* To request speechy to read bio aloud, click `Speech` button
 
 ![1](https://user-images.githubusercontent.com/56960469/116743484-4ab10c80-a9f9-11eb-9808-01262fa88781.gif)
 
