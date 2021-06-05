@@ -1,11 +1,13 @@
 # Main class of a GUI
 from tkinter import Button, Label, Listbox, Scrollbar, StringVar
+from tkinter.messagebox import showinfo
+
 from src.fetchers.img import Img
-from src.speech.speech import Speech
 from src.fetchers.json_obj import JsonObj
+from src.speech.speech import Speech
 from src.speech.speech_recog import SpeechRecog
 from src.window.database_window import DatabaseWindow
-from tkinter.messagebox import showinfo
+
 
 class MainWindow:
     selected_langs = " "

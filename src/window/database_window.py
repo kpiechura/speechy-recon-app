@@ -1,6 +1,8 @@
 # New window instance for database mod
 from tkinter import Button, Entry, Label, Toplevel
+
 from src.fetchers.json_obj import JsonObj
+
 
 class DatabaseWindow:
 
@@ -13,7 +15,7 @@ class DatabaseWindow:
         screen_height = dat.winfo_screenheight()
         x = (screen_width / 2) - (800 / 2)
         y = (screen_height / 2) - (250 / 2)
-        dat.geometry('%dx%d+%d+%d' % (800, 250, x, y+220))
+        dat.geometry('%dx%d+%d+%d' % (800, 250, x, y + 220))
         dat.resizable(height=False, width=False)
 
         # Text label - Addition

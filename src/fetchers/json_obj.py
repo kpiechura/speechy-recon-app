@@ -1,7 +1,10 @@
 import json
-from src.fetchers.get_google_img import GetGoogleImg
 from tkinter.messagebox import showinfo
+
 import wikipedia
+
+from src.fetchers.get_google_img import GetGoogleImg
+
 
 # Read info from JSON obj
 class JsonObj:

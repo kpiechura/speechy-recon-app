@@ -1,5 +1,6 @@
 import pyttsx3
 
+
 # Class with configuration of Txt2S
 class Speech:
 

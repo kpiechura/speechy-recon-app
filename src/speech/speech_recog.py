@@ -1,8 +1,11 @@
-from src.fetchers.img import Img
 from tkinter import Label
-from src.fetchers.json_obj import JsonObj
 from tkinter.messagebox import showinfo
+
 import speech_recognition as sr
+
+from src.fetchers.img import Img
+from src.fetchers.json_obj import JsonObj
+
 
 # Class for speech recognition
 class SpeechRecog:
