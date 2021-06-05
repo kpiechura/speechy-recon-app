@@ -15,7 +15,7 @@ class DatabaseWindow:
         screen_height = dat.winfo_screenheight()
         x = (screen_width / 2) - (800 / 2)
         y = (screen_height / 2) - (250 / 2)
-        dat.geometry('%dx%d+%d+%d' % (800, 250, x, y + 220))
+        dat.geometry('%dx%d+%d+%d' % (800, 400, x, y + 220))
         dat.resizable(height=False, width=False)
 
         # Text label - Addition
@@ -39,7 +39,7 @@ class DatabaseWindow:
 
         # Input - author's info
         E2 = Entry(dat, bd=1)
-        E2.place(x=25, y=150)
+        E2.place(x=25, y=150, height=100, width=200)
 
         # Text label - Delete
         lab_rem_name = Label(dat, text="Remove author ")
@@ -77,7 +77,7 @@ class DatabaseWindow:
 
         # Buttons for records addition and removal
         add_name_button = Button(dat, text="Add", command=add_record_name)
-        add_name_button.place(x=25, y=180)
+        add_name_button.place(x=25, y=280)
 
         del_button = Button(dat, text="Delete", command=del_record)
         del_button.place(x=500, y=110)
