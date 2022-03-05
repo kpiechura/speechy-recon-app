@@ -17,6 +17,7 @@ class JsonObj():
 
     writer_info = ""
     # path_to_img = ""
+    write
 
     # Init with default value
     def __init__(self, writer_info = "Adam Mickiewicz"):
